@@ -1,0 +1,70 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="jumbotron jumbotron-fluid " id="jumbotronInfo" align="center" style="margin-bottom: 0px">
+    <div class="container">
+        <p>Nous sommes le @(((DateTime)ViewData["date"]).ToString("dd/MM/yyyy"))</p>
+        <table width="30%" border="1" cellspacing="1" cellpadding="1" id="table">
+            <tr>
+                <td>
+                    <div align=center>
+                        <img src="data:image/png;base64,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" />
+                    </div>
+                </td>
+            <tr>
+        </table>
+    </div>
+</div>
+<div class="jumbotron">
+    @Html.Action("ListAppointment", "Appointment")
+</div>
+<div class="jumbotron jumbotron-fluid" id="jumbotronImage" style="margin-bottom: 0px" style="margin-top: 0px">
+    <div class="container-fluid">
+        <div class="row textColor">
+            <div class="col-sm-6" align="left">
+                <p>
+                    Au Cœur de notre métier : vous accompagner pour gérer vos risques
+
+                    Plus vous êtes actif, plus le sinistre est imprévisible.
+                    Difficile alors d’anticiper et de maintenir en permanence l’efficacité de vos contrats d’assurances…
+                    Et pourtant nous le faisons, c’est notre ambition.
+
+                    Depuis plus de 25 ans:
+
+                    Nous avons regroupé les expériences de cabinets de courtage (8 depuis 1996)
+                    Nous avons élargi notre panel d’assureurs en toute indépendance (+ de 60 compagnies actives)
+                    Nous avons recruté et formé des équipes solides partageant des valeurs humaines fortes (25 Personnes)
+                    Nous avons développé des outils d’analyse et de gestion (Numérisation dès 1999, ERP dédié…)
+                    …
+                    Nous sommes aujourd’hui parmi les 50 premiers courtiers français
+                </p>
+            </div>
+            <div class="col-sm-6" align="center" id="entreprise">
+                <ul class="timeline"></ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="jumbotron jumbotron-fluid" id="jumbotronContact" style="margin-bottom: 0px" style="margin-top: 0px">
+    <div class="container-fluid">
+        <div class="row textColor">
+            <div class="col-sm-6" align="center">
+                <p>Rencontre un courtier</p>
+                <p>72 Rue des Jacobins - 80090 AMIENS</p>
+            </div>
+            <div class="col-sm-6" align="center">
+                <ul class="timeline">
+                    <p>Contactez-nous via :</p>
+                    <a href="https://www.pretto.fr/courtier-immobilier/"><i class="fab fa-twitter" width="50%" style="font-size: 20px"></i></a>
+                    <a href="https://www.pretto.fr/courtier-immobilier/"><i class="fab fa-youtube" width="50%" style="font-size: 20px"></i></a>
+                    <p>contact@rencontreuncourtier.com</p>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
