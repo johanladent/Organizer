@@ -1,4 +1,9 @@
 ﻿@model List<Organizer.Models.Appointment>
+
+@{
+    Layout = null;
+} 
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -20,7 +25,7 @@
                             <td>@appointment.Subject</td>
                             <td>@appointment.Broker.FullName</td>
                             <td>@appointment.Customer.FullName</td>
-                            <td>@Html.ActionLink("Details", "DetailsAppointment", new { id = appointment.AppointmentID }, new { @class = "btn btn-dark" })</td>
+                            <td>@Html.ActionLink("Details", "DetailAppointment", new { id = appointment.AppointmentID }, new { @class = "btn btn-dark" })</td>
                         </tr>
                     }
                 </table>

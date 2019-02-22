@@ -6,4 +6,5 @@
             mask: true
         }
     );
+    $('#delModal').modal('show');
 });

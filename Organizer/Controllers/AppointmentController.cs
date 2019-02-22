@@ -1,12 +1,11 @@
 ﻿using Organizer.Models;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
-using System.Net;
 using System.Web;
 using System.Web.Mvc;
-
+using System.Data.Entity;
+using System.Net;
 
 namespace Organizer.Controllers
 {
@@ -48,6 +47,80 @@ namespace Organizer.Controllers
             ViewBag.CustomerID = new SelectList(db.Customers, "CustomerID", "FullName");
 
             return View();
+        }
+        public ActionResult DetailAppointment(int? id)
+        {
+            ViewBag.BrokerID = new SelectList(db.Brokers, "BrokerID", "FullName");
+            ViewBag.CustomerID = new SelectList(db.Customers, "CustomerID", "FullName");
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Appointment appointments = db.Appointments.Find(id);
+            if (appointments == null)
+            {
+                return HttpNotFound();
+            }
+            return View(appointments);
+        }
+        public ActionResult EditAppointment(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Appointment appointment = db.Appointments.Find(id);
+            if (appointment == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.BrokerID = new SelectList(db.Brokers, "BrokerID", "FullName");
+            ViewBag.CustomerID = new SelectList(db.Customers, "CustomerID", "FullName");
+            return View(appointment);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditAppointment([Bind(Include = "AppointmentID, DateHour, BrokerID, CustomerID, Subject")] Appointment appointment)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(appointment).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index", "Home");
+            }
+            ViewBag.BrokerID = new SelectList(db.Brokers, "BrokerID", "FullName");
+            ViewBag.CustomerID = new SelectList(db.Customers, "CustomerID", "FullName");
+            return View("DetailsAppointment");
+        }
+        public ActionResult DeleteAppointment(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Appointment appointment = db.Appointments.Find(id);
+            if (appointment == null)
+            {
+                return HttpNotFound();
+            }
+            return View(appointment);
+        }
+        [HttpPost, ActionName("DeleteAppointment")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Appointment appointment = db.Appointments.Find(id);
+            if (appointment == null)
+            {
+                return HttpNotFound();
+            }
+            db.Appointments.Remove(appointment);
+            db.SaveChanges();
+            return RedirectToAction("Index", "Home");
         }
     }
 }
